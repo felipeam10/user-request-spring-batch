@@ -1,9 +1,11 @@
 package com.felipeam10.user_request_spring_batch.step;
 
 import com.felipeam10.user_request_spring_batch.dto.UserDTO;
+import com.felipeam10.user_request_spring_batch.entities.User;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
+import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +22,13 @@ public class FetchUserDataAndStoreDBStepConfig {
     private int chunkSize;
     @Bean
     public Step fetchUserDataAndStoreDBStep(ItemReader<UserDTO> fetchUserDataReader,
-                                            ItemWriter<UserDTO> insertUserDataDBWriter,
+                                            ItemProcessor<UserDTO, User> selectFieldsUserDataProcessor,
+                                            ItemWriter<User> insertUserDataDBWriter,
                                             JobRepository jobRepository) {
         return new StepBuilder("fetchUserDataAndStoreDBStep", jobRepository)
-                .<UserDTO, UserDTO>chunk(chunkSize, transactionManager)
+                .<UserDTO, User>chunk(chunkSize, transactionManager)
                 .reader(fetchUserDataReader)
+                .processor(selectFieldsUserDataProcessor)
                 .writer(insertUserDataDBWriter)
                 .build();
     }
