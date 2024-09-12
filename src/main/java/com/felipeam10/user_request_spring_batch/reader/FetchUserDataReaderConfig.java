@@ -38,12 +38,11 @@ public class FetchUserDataReaderConfig implements ItemReader<UserDTO> {
     @Override
     public UserDTO read() throws Exception, UnexpectedInputException, ParseException, NonTransientResourceException {
         UserDTO user;
-
-        if(userIndex < users.size()){
+        if(userIndex < users.size())
             user = users.get(userIndex);
-        } else {
+        else
             user = null;
-        }
+
         userIndex++;
         return user;
     }
@@ -60,7 +59,6 @@ public class FetchUserDataReaderConfig implements ItemReader<UserDTO> {
                 });
 
         List<UserDTO> result = response.getBody().getContent();
-
         return result;
     }
 
@@ -73,14 +71,14 @@ public class FetchUserDataReaderConfig implements ItemReader<UserDTO> {
     }
 
     @BeforeChunk
-    public void beforeChunk(ChunkContext context) throws Exception {
+    public void beforeChunk(ChunkContext context) {
         for (int i = 0; i < chunkSize; i += pageSize) {
             users.addAll(fecthUserDataFromAPI());
         }
     }
 
     @AfterChunk
-    public void afterChunk(ChunkContext context) throws Exception {
+    public void afterChunk(ChunkContext context) {
         logger.info("Final chunk");
         incrementPage();
         userIndex = 0;
