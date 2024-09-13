@@ -3,9 +3,10 @@
 
 #### Before starting
 
+- clients project --> in folder src/main/resources/client_project/clients --> open and run this project for your tests with principal user-request-spring-batch project
 - [Using Docker Compose with MySQL and phpMyAdmin](https://github.com/devsuperior/docker-compose-mysql)
 
-- [Postman collection --> in folder resources/postman_files]()
+- Postman collection --> in folder resources/postman_files
 
 #### import.sql
 
