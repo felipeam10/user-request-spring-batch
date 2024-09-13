@@ -1,0 +1,41 @@
+{
+	"info": {
+		"_postman_id": "cadc5b65-1062-4a1f-981a-ec40bf1cc472",
+		"name": "User-request-spring-batch",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9794461",
+		"_collection_link": "https://cloudy-astronaut-6234.postman.co/workspace/Spring-Batch~28fb5e35-a396-4857-8063-1f6804021385/collection/9794461-cadc5b65-1062-4a1f-981a-ec40bf1cc472?action=share&source=collection_link&creator=9794461"
+	},
+	"item": [
+		{
+			"name": "Find All Paged",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8089/clients/pagedData?page=0&size=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8089",
+					"path": [
+						"clients",
+						"pagedData"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
